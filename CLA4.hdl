@@ -13,6 +13,6 @@ CHIP CLA4 {
 
     PARTS: 
     // TODO: provide your solution
-    FullAdder(a=x[0], b=y[0], c=cin, sum=z[0], carry=);
-    
+    FullAdder(a=x[0], b=y[0], c=cin, sum=z[0], carry=)
+
 }
