@@ -4,8 +4,8 @@
  * Date created: July 9, 2020
  * Date modified:
  * 
- * Student name(s): 
- * Date modified: 
+ * Student name(s): Adeeb Abbas, Sidhaant Verma
+ * Date modified: Sunday, October 4th 2020
  */
 
  CHIP CLA16 {
@@ -14,4 +14,9 @@
 
     PARTS: 
     // TODO: provide your solution
+    CLA4 (x = x[0..3], y=y[0..3], cin=false, z=z[0..3], cout = cout)
+    CLA4 (x = x[4..7], y=y[4..7], cin=cout, z=z[4..7], cout = cout1)
+    CLA4 (x = x[8..11], y=y[8..11], cin=cout1, z=z[8..11], cout = cout2)
+    CLA4 (x = x[12..15], y=y[12..15], cin=cout2, z=z[12..15], cout = cout3)
+
 }

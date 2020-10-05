@@ -3,10 +3,9 @@
  * Author: Naga Kandasamy
  * Date created: June 29, 2020
  * 
- * Student name(s): 
- * Date modified: 
+ * Student name(s): Adeeb Abbas, Sidhaant Verma
+ * Date modified: Sunday, October 4th 2020
  */
-
 CHIP CLA4 {
     IN x[4], y[4], cin;     // 4-bit inputs
     OUT z[4], cout;         // 4-bit output, 1 carry out bit
@@ -42,8 +41,8 @@ CHIP CLA4 {
     Or(a=g[3], b=tmp4, out=cout);
 
     //adding everything together!
-    FullAdder(a=x[0], b=y[0], c=cin, sum=z[0], carry=);
-    FullAdder(a=x[1], b=y[1], c=c[1], sum=z[1], carry=);
-    FullAdder(a=x[2], b=y[2], c=c[2], sum=z[2], carry=);
-    FullAdder(a=x[3], b=y[3], c=c[3], sum=z[3], carry=);
+    Xor(a=p[0], b=cin, out=z[0]);
+    Xor(a=p[1], b=c[1], out=z[1]);
+    Xor(a=p[2], b=c[2], out=z[2]);
+    Xor(a=p[3], b=c[3], out=z[3]);
 }
