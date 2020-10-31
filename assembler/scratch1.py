@@ -81,7 +81,7 @@ symbol_table = {'SP':0,
 def remove_whitespace(command):
     return "".join(command.split())
 
-def char_is_valid(char):
+def char_is_valid(char): #TODO: Rewrite
     valid = False
     if char.isnumeric() or char.isalpha() or char == "@" or char == "=" or char == "(" or char == ")" \
             or char == "-" or char == "+" or char == ";"\
@@ -142,13 +142,17 @@ def validate_statement(command, rom_counter):
 
     #Labels
     elif "(" == command[0] and ")" == command[-1]:
-        symbol = command[1:-1]
+        label = command[1:-1]
+        print("Label: ", label)
         #print("A type label symbol:", symbol)
-        if symbol not in symbol_table: #Add user defined label to symbol table
-            symbol_table.update({f"{symbol}": rom_counter})
+        if label not in symbol_table: #Add user defined label to symbol table
+            symbol_table.update({f"{label}": rom_counter})
+            s["instruction_type"] = 'LABEL'
+            s['status'] = 0
+
 
     # C-type instructions
-    elif "=" or ";" in command:
+    elif "=" in command or ";" in command:
         dest = ''
         comp = ''
         jump = 'null'
@@ -160,7 +164,7 @@ def validate_statement(command, rom_counter):
             p_dest = lhs[0]
             p_comp = lhs[1].split(";")[0]
             p_jump = command.split(";")[1]
-            print("dest: ", dest, "comp : ",comp, "jump",  jump)
+            #print("dest: ", dest, "comp : ",comp, "jump",  jump)
 
             if p_dest in valid_dest_patterns and p_comp in valid_comp_patterns \
                 and p_jump in valid_jmp_patterns:
@@ -178,7 +182,7 @@ def validate_statement(command, rom_counter):
                 status = 0
 
         elif ";" in command:
-            print("only ; in command: ")
+            #print("only ; in command: ")
             lhs = command.split(";")[0]
             rhs = command.split(";")[1]
             if lhs in valid_comp_patterns and rhs in valid_jmp_patterns:
@@ -194,9 +198,8 @@ def validate_statement(command, rom_counter):
 
     else:
         s['status'] = -1
-        print("Error. Status is -1.")
 
-    print(s)
+    print("Printing s:", s)
     return s
 
 
@@ -220,8 +223,9 @@ def parse(command):
 
     """
 
+    parsed_program = []
     rom_counter = 0
-    f = open("series_sum.asm", "r")
+    f = open("assembler/series_sum.asm", "r")
 
     # Data structure to hold the parsed fields for the command
 
@@ -270,22 +274,27 @@ def parse(command):
         else:
             if line_counter == 7: #TODO: Remove line counter
                 # print(command)
-                command_dict = validate_statement(command, rom_counter)
+                command_dict = validate_statement(command, rom_counter) #Validate command
                 # print(command_dict)
-                if command_dict["instruction_type"] == "A-INSTRUCTION" or \
-                        command_dict["instruction_type"] == "C-INSTRUCTION":
-                    rom_counter += 1 #TODO: Recheck if rom_counter incrementer position is correct
+                if command_dict["status"] == 0:
+                    if command_dict["instruction_type"] == "A-INSTRUCTION" or \
+                            command_dict["instruction_type"] == "C-INSTRUCTION":
+                        rom_counter += 1
+                        parsed_program.append(command_dict)
 
-
-                # todo: if command_dict is empty/if command[dict] status is -1:
-                #     raise error
-                # todo: else:
-                #     commands.append(command_dict)
+                else:
+                    print("Invalid command")
+                    break
 
         line_counter += 1
 
 
-validate_statement("@END")
+parse("Meaningless")
+
+# validate_statement("(ece", 0)
+
+
+
 
 """
     @i

@@ -162,7 +162,8 @@ def print_machine_code(machine_code):
         rom_address = rom_address + 1
 
 
-def run_assembler(file_name):      
+def run_assembler(file_name):
+
     """Pass 1: Parse the assembly code into an intermediate data structure.
     The intermediate data structure can be a list of elements, called ir, where
     each element is a dictionary 
@@ -186,7 +187,10 @@ def run_assembler(file_name):
     machine_code = []
     
     return machine_code
-    
+
+
+
+
   
 # if __name__ == "__main__":
 if len(sys.argv) < 2:
