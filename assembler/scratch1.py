@@ -116,7 +116,7 @@ def A_register_symbol_type(A_register_command):
 
 
 def validate_statement(command, rom_counter):
-    command = remove_whitespace(command)
+    #command = remove_whitespace(command)
 
     s = {}
     s['instruction_type'] = ''
@@ -127,8 +127,13 @@ def validate_statement(command, rom_counter):
     s['jmp'] = ''
     s['status'] = -1 #error by default
 
+    # if command == '': #todo: go to next line
+    #     # print("got hr")
+    #     print("Empty line")
+    #     s['status'] = -1
 
     # A-type instructions
+
     if command[0] == "@":
         A_register_symbol = command[1:] #TODO: Check if symbol is user defined or not in second cycle. Anything goes for this parse.
         if A_register_symbol_isvalid(A_register_symbol):
@@ -157,6 +162,7 @@ def validate_statement(command, rom_counter):
         comp = ''
         jump = 'null'
         status = -1 #-1 by default; todo: can define up there too
+
 
         if "=" in command and ";" in command:
             lhs = command.split("=")
@@ -199,11 +205,11 @@ def validate_statement(command, rom_counter):
     else:
         s['status'] = -1
 
-    print("Printing s:", s)
+    # print("Printing s:", s)
     return s
 
 
-def parse(command):
+def create_first_pass_data_structure(filename):
     """Implements finite automate to scan assembly statements and parse them.
 
     WHITE SPACE: Space characters are ignored. Empty lines are ignored.
@@ -225,57 +231,59 @@ def parse(command):
 
     parsed_program = []
     rom_counter = 0
-    f = open("assembler/series_sum.asm", "r")
-
+    f = open(filename, "r")
     # Data structure to hold the parsed fields for the command
 
-    line_counter = 0 #TODO: Remove; for testing purposes only
+    # state = 0
+
+    line_counter = 1
     for line in f.readlines():
-        s = {}
         state = 0
+        s = {}
         command = ''
 
-        #checking for invalid characters and comments
-        for char in line:
-            if state == -1:
-                state = -1  #Error state.
-                print("Unrecognized character. Breaking now. ")
-                break
-            elif state == 0:
-                if char == ' ':
-                    state = 0  # Ignore blank spaces
-                elif char == '\n':
-                    state = 0  #Ignore blank lines??
-                elif char == '/':
-                    state = 1
+        #parse line for comments and invalid characters
+        if line == '\n': #ignore empty lines
+            print("empty line")
+            continue
 
-                #couple elifs here and create token??
-                elif char_is_valid(char):
-                    command += char
-                else:
-                    state = -1  #Not a comment so fuck off
+        else:
+            for char in line:
+                if state == -1:
+                    state = -1  #Error state
+                    print("Unrecognized character. Breaking now. ")
+                    break
 
-            elif state == 1:
-                if char == '/':
+                elif state == 0:
+                    if char == ' ':
+                        state = 0  # Ignore blank spaces
+                    elif char == '\n':
+                        state = 0  #Ignore blank lines??
+                    elif char == '/':
+                        state = 1
+
+                    elif char_is_valid(char):
+                        command += char
+                    else:
+                        state = -1  #Not a comment so fuck off
+
+                elif state == 1:
+                    if char == '/':
+                        state = 2
+                    else:
+                        state = -1
+
+                elif state == 2:
                     state = 2
-                else:
-                    state = -1
+                    break
 
-            elif state == 2:
-                state = 2
+            if state == -1: #invalid character found
+                state = -1
                 break
 
             else:
-                state = -1
-
-        if state == -1: #TODO: How to handle outer loop- EXIT PROGRAM
-            break #we want the outer loop to exit too if we encounter an unrecognized character
-
-        else:
-            if line_counter == 7: #TODO: Remove line counter
-                # print(command)
-                command_dict = validate_statement(command, rom_counter) #Validate command
-                # print(command_dict)
+                print("Reached classifier, command:", command)
+                command_dict = validate_statement(command, rom_counter)
                 if command_dict["status"] == 0:
                     if command_dict["instruction_type"] == "A-INSTRUCTION" or \
                             command_dict["instruction_type"] == "C-INSTRUCTION":
@@ -284,14 +292,20 @@ def parse(command):
 
                 else:
                     print("Invalid command")
-                    break
 
         line_counter += 1
 
+    return parsed_program
 
-parse("Meaningless")
 
-# validate_statement("(ece", 0)
+def run_assembler(file_name):
+    program = create_first_pass_data_structure(file_name)
+    for i in program:
+        print(i["instruction_type"])
+
+    print(symbol_table)
+
+run_assembler("assembler/mult.asm")
 
 
 
