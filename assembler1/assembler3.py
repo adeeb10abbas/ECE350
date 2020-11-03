@@ -42,7 +42,7 @@ def parse(filename):
     cleaned_file = format_asm_file(filename) #removes whitespace, new line characters and comments and returns dictionary of lines with original line numbers
     if cleaned_file["status"] == -1:
         print(f"error in line {cleaned_file['error_line']}")
-        return cleaned_file
+        return cleaned_file #IF ERR, RETURNS DICT WITH
 
     else:
         cleaned_file.pop('status')
@@ -80,13 +80,13 @@ def parse(filename):
 program = parse("mult.asm")
 
 # TEST
-#
-# f = open("test_f", "w+")
-# program = [{'instruction_type': 'A-INSTRUCTION', 'value': '2', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'M', 'comp': '0', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': '1', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'D', 'comp': 'M', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': 'END', 'value_type': 'SYMBOL', 'dest': '', 'jmp': '', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': '', 'comp': 'D', 'jmp': 'JEQ', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': '0', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'D', 'comp': 'M', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': '2', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'M', 'comp': 'M+D', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': '1', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'M', 'comp': 'M-1', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': 'BEGIN', 'value_type': 'SYMBOL', 'dest': '', 'jmp': '', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': '', 'comp': '0', 'jmp': 'JMP', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': 'END', 'value_type': 'SYMBOL', 'dest': '', 'jmp': '', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': '', 'comp': '0', 'jmp': 'JMP', 'status': 0}]
-#
-# for d in program:
-#     f.write(f"{d} + \n")
-# print(symbol_table)
+
+f = open("test_f", "w+")
+#program = [{'instruction_type': 'A-INSTRUCTION', 'value': '2', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'M', 'comp': '0', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': '1', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'D', 'comp': 'M', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': 'END', 'value_type': 'SYMBOL', 'dest': '', 'jmp': '', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': '', 'comp': 'D', 'jmp': 'JEQ', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': '0', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'D', 'comp': 'M', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': '2', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'M', 'comp': 'M+D', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': '1', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'M', 'comp': 'M-1', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': 'BEGIN', 'value_type': 'SYMBOL', 'dest': '', 'jmp': '', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': '', 'comp': '0', 'jmp': 'JMP', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': 'END', 'value_type': 'SYMBOL', 'dest': '', 'jmp': '', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': '', 'comp': '0', 'jmp': 'JMP', 'status': 0}]
+
+for d in program:
+    f.write(f"{d} + \n")
+print(symbol_table)
 
 
 
