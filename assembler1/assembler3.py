@@ -27,23 +27,14 @@ symbol_table = {'SP':0,
                 'KBD':24576
                 }
 
-"""
-File is converted to a dictionary of this type:
-{"status": 0 if no errors, -1 if error, 
-"line_error": line_number of error,
-line_number: command 
-
-where line_number is a line number in the original file that is not a comment 
-
-"""
 def parse(filename):
     program = []
     rom_counter = 0
 
     cleaned_file = format_asm_file(filename) #removes whitespace, new line characters and comments and returns dictionary of lines with original line numbers
     if cleaned_file["status"] == -1:
-        print(f"error in line {cleaned_file['error_line']}")
-        return cleaned_file #IF ERR, RETURNS DICT WITH
+        #print(f"error in line {cleaned_file['error_line']}")
+        return f"error in line {cleaned_file['error_line']}"
 
     else:
         cleaned_file.pop('status')
@@ -69,30 +60,31 @@ def parse(filename):
                         symbol_table.update({s["value"]: rom_counter}) #TODO: What should the ROM counter count be?
                     else:
                         continue
-
-        # print("We have our data structure")
-        # print("Program: ", program)
-
     return program
 
 def generate_machine_code(program):
     """Generate machine code from intermediate data structure"""
 
-    ram_counter = 15
+    ram_counter = 16
     machine_code = []
 
     for instruction in program:
         if instruction['instruction_type'] == 'A-INSTRUCTION':
-            if instruction['value'] in symbol_table:
+
+            if instruction['value_type'] == 'NUMBER':
+                number = int(instruction['value'])
+                bin = generate_A_binary(number)
+
+            elif instruction['value'] in symbol_table: #if its a number it won't be in the symbol table.
                 address = symbol_table[instruction['value']]
+                bin = generate_A_binary(address)
 
             else:
                 #print(f"symbol not in symbol table. ram counter: ", ram_counter)
                 symbol_table.update({instruction['value']: ram_counter})
                 address = ram_counter
                 ram_counter += 1
-
-            bin = generate_A_binary(address)
+                bin = generate_A_binary(address)
 
         elif instruction['instruction_type'] == 'C-INSTRUCTION':
             bin = generate_C_binary(instruction)
@@ -102,8 +94,52 @@ def generate_machine_code(program):
     #print(machine_code)
     return machine_code
 
-program = parse("mult.asm")
-generate_machine_code(program)
+def print_intermediate_ds(intermediate_data_structure):
+    print("Intermediate data structure: ")
+    for instruction in intermediate_data_structure:
+        print(instruction)
+
+def print_machine_code(machine_code):
+    for line in machine_code:
+        print(line)
+
+
+#Driver
+
+# if __name__ == "__main__":
+if len(sys.argv) < 2:
+    print("Usage: assembler.py file-name.asm")
+    print("Example: assembler.py mult.asm")
+
+else:
+    print("Assembling file:", sys.argv[1])
+    print()
+    file_name_minus_extension, _ = os.path.splitext(sys.argv[1])
+    output_file = file_name_minus_extension + '.hack'
+    # machine_code = run_assembler(sys.argv[1])
+    try:
+        intermediate_data_structure = parse(file_name)
+        # if type(intermediate_data_structure) == str:
+        #     print(intermediate_data_structure) #if error, returns error with line number
+        #
+        # else:
+        #     print_intermediate_ds(intermediate_data_structure)
+        #     machine_code = generate_machine_code(intermediate_data_structure)
+
+            # if machine_code:
+            #     print_machine_code(machine_code)
+            #     print('Machine code generated successfully')
+            #     print('Writing output to file:', output_file)
+            #     f = open(output_file, 'w+')
+            #     for s in machine_code:
+            #         f.write('%s\n' %s)
+            #     f.close()
+            #
+            # else:
+            #     print("Error generating machine code")
+
+
+
 
 
 

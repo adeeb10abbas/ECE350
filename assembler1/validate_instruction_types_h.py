@@ -28,7 +28,7 @@ def A_register_symbol_isvalid(possible_A_instruction):
     s['jmp'] = ''
     s['status'] = -1
 
-    print(possible_A_instruction)
+    #print(possible_A_instruction)
     possible_A_instruction = possible_A_instruction[1:] #Remove @
     valid = False
     accepted_characters = ["_", ".", "$", ":"]
