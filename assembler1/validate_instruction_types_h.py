@@ -39,7 +39,7 @@ def A_register_symbol_isvalid(possible_A_instruction):
                 valid = True
 
     elif possible_A_instruction[0].isnumeric():
-        if possible_A_instruction.isnumeric(): #TODO: What is an accepted A-value command?
+        if possible_A_instruction.isnumeric() and possible_A_instruction>0: #TODO: What is an accepted A-value command?
             valid = True
 
     if valid:
