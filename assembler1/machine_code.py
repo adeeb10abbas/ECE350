@@ -94,22 +94,13 @@ def generate_C_binary(s):
     comp = ''
     jmp = ''
 
-    if s['dest']:
-        dest = valid_dest_patterns[s['dest']]
-    else:
-        dest =
-
+    dest = valid_dest_patterns[s['dest']]
 
     if s['comp']:
-        comp = valid_comp_patterns[s['comp']]
+        comp = valid_comp_patterns[s['comp']] #todo: can comp be anything other than 0? Handle for that.
 
-    else:
-        comp =
+    jmp = valid_dest_patterns[s['jmp']]
 
-    if s['jmp'] and s['jmp'] != 'null':
-        jmp = valid_dest_patterns[s['jmp']]
-    else:
-        jmp = 000
 
     print("dest", dest)
     print("comp", comp)

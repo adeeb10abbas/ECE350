@@ -166,12 +166,12 @@ def C_instruction_isvalid(command):
     s['instruction_type'] = ''
     s['value'] = ''
     s['value_type'] = ''
-    s['dest'] = ''
+    s['dest'] = 'null'
     s['comp'] = ''
     s['jmp'] = 'null'
     s['status'] = -1  # error by default
 
-    dest = ''
+    dest = 'null'
     comp = ''
     jump = 'null'
     status = -1  # -1 by default;
