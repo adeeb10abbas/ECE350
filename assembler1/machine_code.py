@@ -26,41 +26,12 @@ symbol_table = {'SP':0,
                 }
 
 
-def generate_machine_code(program):
-    """Generate machine code from intermediate data structure"""
-
-    ram_counter = 15
-    machine_code = []
-
-    for instruction in program:
-        if instruction['instruction_type'] == 'A-INSTRUCTION':
-            if instruction['value'] in symbol_table:
-                address = symbol_table[instruction['value']]
-
-            else:
-                print(f"symbol not in symbol table. ram counter: ", ram_counter)
-                symbol_table.update({instruction['value']: ram_counter})
-                address = ram_counter
-                ram_counter += 1
-
-            bin = generate_A_binary(address)
-
-        elif instruction['instruction_type'] == 'C-INSTRUCTION':
-            bin = generate_C_binary(instruction)
-
-        machine_code.append(bin)
-
-    print(machine_code)
-    return machine_code
-
-A = {'instruction_type': 'A-INSTRUCTION', 'value': '2', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}
-
+# A = {'instruction_type': 'A-INSTRUCTION', 'value': '2', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}
 def generate_A_binary(address):
     instruction = '0' + f'{address:015b}'
 
     #print(instruction)
     return instruction
-
 
 
 """The dest bits are d1 d2 d3"""
@@ -117,7 +88,7 @@ valid_jmp_patterns =  {'null':'000',
                        }
 
 #M = 1
-C = {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'M', 'comp': '1', 'jmp': 'null', 'status': 0} #what is the default if there isno jmp or comp?
+#C = {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'M', 'comp': '1', 'jmp': 'null', 'status': 0} #what is the default if there isno jmp or comp?
 
 #dest=comp;jmp
 def generate_C_binary(s):
@@ -125,17 +96,17 @@ def generate_C_binary(s):
 
     dest = valid_dest_patterns[s['dest']]
     comp = valid_comp_patterns[s['comp']]
-    jmp = valid_dest_patterns[s['jmp']]
+    jmp = valid_jmp_patterns[s['jmp']]
 
     instruction = instruction + comp + dest + jmp
 
     #print("Instruction", instruction)
     return instruction
 
-program = [A, C]
+#program = [A, C]
+#
+# generate_machine_code(program)
 
-generate_machine_code(program)
 
 
-
-print("15 in bin", bin(15))
+#print("15 in bin", bin(15))

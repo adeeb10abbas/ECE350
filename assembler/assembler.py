@@ -12,6 +12,7 @@ Date modified:
 import os
 import sys
 
+
 """The comp field is a c1 c2 c3 c4 c5 c6"""
 valid_comp_patterns = {'0':'0101010', 
                        '1':'0111111',
@@ -147,7 +148,6 @@ def parse(command):
    
 def generate_machine_code():
     """Generate machine code from intermediate data structure"""
-    
     machine_code = []
     
     return machine_code

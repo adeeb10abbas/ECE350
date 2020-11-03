@@ -1,5 +1,6 @@
 from format_asm_file import format_asm_file
 from validate_instruction_types_h import validate_instruction
+from machine_code import generate_C_binary, generate_A_binary
 
 symbol_table = {'SP':0,
                 'LCL':1,
@@ -55,7 +56,7 @@ def parse(filename):
 
             if s["status"] == -1:
                 print(f'Error on line {line_number}')
-                break
+                return #todo
 
             elif s["status"] == 0:
                 if s["instruction_type"] == "A-INSTRUCTION" or \
@@ -74,19 +75,35 @@ def parse(filename):
 
     return program
 
-            #elif status is something else to handle for xyz
+def generate_machine_code(program):
+    """Generate machine code from intermediate data structure"""
 
+    ram_counter = 15
+    machine_code = []
+
+    for instruction in program:
+        if instruction['instruction_type'] == 'A-INSTRUCTION':
+            if instruction['value'] in symbol_table:
+                address = symbol_table[instruction['value']]
+
+            else:
+                #print(f"symbol not in symbol table. ram counter: ", ram_counter)
+                symbol_table.update({instruction['value']: ram_counter})
+                address = ram_counter
+                ram_counter += 1
+
+            bin = generate_A_binary(address)
+
+        elif instruction['instruction_type'] == 'C-INSTRUCTION':
+            bin = generate_C_binary(instruction)
+
+        machine_code.append(bin)
+
+    #print(machine_code)
+    return machine_code
 
 program = parse("mult.asm")
-
-# TEST
-
-f = open("test_f", "w+")
-#program = [{'instruction_type': 'A-INSTRUCTION', 'value': '2', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'M', 'comp': '0', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': '1', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'D', 'comp': 'M', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': 'END', 'value_type': 'SYMBOL', 'dest': '', 'jmp': '', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': '', 'comp': 'D', 'jmp': 'JEQ', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': '0', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'D', 'comp': 'M', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': '2', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'M', 'comp': 'M+D', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': '1', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'M', 'comp': 'M-1', 'jmp': 'null', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': 'BEGIN', 'value_type': 'SYMBOL', 'dest': '', 'jmp': '', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': '', 'comp': '0', 'jmp': 'JMP', 'status': 0}, {'instruction_type': 'A-INSTRUCTION', 'value': 'END', 'value_type': 'SYMBOL', 'dest': '', 'jmp': '', 'status': 0}, {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': '', 'comp': '0', 'jmp': 'JMP', 'status': 0}]
-
-for d in program:
-    f.write(f"{d} + \n")
-print(symbol_table)
+generate_machine_code(program)
 
 
 

@@ -28,7 +28,7 @@ def A_register_symbol_isvalid(possible_A_instruction):
     s['jmp'] = ''
     s['status'] = -1
 
-
+    print(possible_A_instruction)
     possible_A_instruction = possible_A_instruction[1:] #Remove @
     valid = False
     accepted_characters = ["_", ".", "$", ":"]
@@ -39,7 +39,7 @@ def A_register_symbol_isvalid(possible_A_instruction):
                 valid = True
 
     elif possible_A_instruction[0].isnumeric():
-        if possible_A_instruction.isnumeric() and possible_A_instruction>0: #TODO: What is an accepted A-value command?
+        if possible_A_instruction.isnumeric() and int(possible_A_instruction) >= 0: #TODO: What is an accepted A-value command?
             valid = True
 
     if valid:
@@ -251,8 +251,8 @@ def validate_instruction(command):
 
 
 
-s = validate_instruction("(LOOP)")
-print(s)
+# s = validate_instruction("(LOOP)")
+# print(s)
 
 
 

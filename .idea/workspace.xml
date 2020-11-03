@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f3f83ff-9d97-41b2-b3f9-74c95ad2897b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/assembler/assembler.py" beforeDir="false" afterPath="$PROJECT_DIR$/assembler/assembler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assembler1/assembler3.py" beforeDir="false" afterPath="$PROJECT_DIR$/assembler1/assembler3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assembler1/machine_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/assembler1/machine_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assembler1/test_f" beforeDir="false" afterPath="$PROJECT_DIR$/assembler1/test_f" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assembler1/validate_instruction_types_h.py" beforeDir="false" afterPath="$PROJECT_DIR$/assembler1/validate_instruction_types_h.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assembler1/mult.asm">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+            <state relative-caret-position="223">
+              <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -26,10 +27,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assembler1/assembler3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" selection-start-line="3" selection-end-line="26" selection-end-column="17" />
+            <state relative-caret-position="665">
+              <caret line="78" column="35" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
+                <element signature="e#122#706#0" />
+                <element signature="e#2205#2242#0" />
+                <element signature="e#2492#3295#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assembler1/machine_code.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+              <folding>
+                <element signature="e#22#606#0" />
+                <element signature="e#940#1221#0" />
+                <element signature="e#537#1682#0" />
+                <element signature="e#3559#3565#0" />
+                <element signature="e#4048#4065#0" />
               </folding>
             </state>
           </provider>
@@ -49,13 +69,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assembler1/validate_instruction_types_h.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="577">
-              <caret line="196" column="33" lean-forward="true" selection-start-line="196" selection-start-column="33" selection-end-line="196" selection-end-column="33" />
+            <state relative-caret-position="241">
+              <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
               <folding>
                 <element signature="e#95#205#0" />
+                <element signature="e#1820#2777#0" />
+                <element signature="e#2802#3946#0" />
+                <element signature="e#3970#4251#0" />
+                <element signature="e#4275#4565#0" />
               </folding>
             </state>
           </provider>
@@ -64,29 +88,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assembler/assembler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-524">
-              <caret line="121" column="4" lean-forward="true" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="4" />
+            <state relative-caret-position="179">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
               <folding>
                 <element signature="e#186#195#0" expanded="true" />
                 <element signature="e#2194#2778#0" />
-                <element signature="e#2827#2976#0" />
-                <element signature="e#3024#3138#0" />
                 <element signature="e#4308#4473#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/assembler1/machine_code.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="135" lean-forward="true" selection-start-line="135" selection-end-line="135" />
-              <folding>
-                <element signature="e#22#606#0" />
-                <element signature="e#940#1221#0" />
-                <element signature="e#537#1682#0" />
-                <element signature="e#2079#2369#0" />
+                <element signature="e#4511#5094#0" />
               </folding>
             </state>
           </provider>
@@ -112,7 +120,6 @@
         <option value="$PROJECT_DIR$/scratch1.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_32.py" />
-        <option value="$PROJECT_DIR$/assembler/assembler.py" />
         <option value="$PROJECT_DIR$/assembler/again.py" />
         <option value="$PROJECT_DIR$/assembler/assembler1/assembler.py" />
         <option value="$PROJECT_DIR$/assembler/mult.asm" />
@@ -126,11 +133,12 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_34.py" />
         <option value="$PROJECT_DIR$/assembler1/format_asm_file.py" />
         <option value="$PROJECT_DIR$/assembler1/mult.asm" />
-        <option value="$PROJECT_DIR$/assembler1/assembler3.py" />
         <option value="$PROJECT_DIR$/assembler/series_sum.asm" />
         <option value="$PROJECT_DIR$/assembler1/test_f" />
-        <option value="$PROJECT_DIR$/assembler1/validate_instruction_types_h.py" />
+        <option value="$PROJECT_DIR$/assembler/assembler.py" />
         <option value="$PROJECT_DIR$/assembler1/machine_code.py" />
+        <option value="$PROJECT_DIR$/assembler1/assembler3.py" />
+        <option value="$PROJECT_DIR$/assembler1/validate_instruction_types_h.py" />
       </list>
     </option>
   </component>
@@ -150,11 +158,6 @@
             <path>
               <item name="assembler_assn" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="~/Desktop/assembler_assn" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="assembler_assn" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/Desktop/assembler_assn" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="assembler" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="assembler_assn" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -206,7 +209,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.machine_code">
+  <component name="RunManager" selected="Python.scratch2">
     <configuration name="format_asm_file" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="assembler_assn" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -333,17 +336,27 @@
       <method v="2" />
     </configuration>
     <configuration name="validate_instruction_types_h" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="assembler_assn" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="/Library/Frameworks/Python.framework/Versions/3.7/bin/python3" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/assembler1" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </EXTENSION>
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/assembler1/validate_instruction_types_h.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -363,9 +376,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.machine_code" />
         <item itemvalue="Python.scratch2" />
         <item itemvalue="Python.validate_instruction_types_h" />
+        <item itemvalue="Python.machine_code" />
         <item itemvalue="Python.scratch_34" />
         <item itemvalue="Python.format_asm_file" />
       </list>
@@ -391,13 +404,13 @@
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.021141648" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" weight="0.2759036" />
+      <window_info anchor="bottom" id="Terminal" order="0" weight="0.23975904" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="2" weight="0.32891566" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32891566" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.32891566" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.22048193" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.25421688" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -473,38 +486,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assembler/assembler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-524">
-          <caret line="121" column="4" lean-forward="true" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="4" />
-          <folding>
-            <element signature="e#186#195#0" expanded="true" />
-            <element signature="e#2194#2778#0" />
-            <element signature="e#2827#2976#0" />
-            <element signature="e#3024#3138#0" />
-            <element signature="e#4308#4473#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assembler/series_sum.asm">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assembler1/test_f">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="120" selection-start-line="15" selection-start-column="120" selection-end-line="15" selection-end-column="120" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assembler1/mult.asm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -520,35 +505,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assembler1/validate_instruction_types_h.py">
+    <entry file="file://$PROJECT_DIR$/assembler1/test_f">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="196" column="33" lean-forward="true" selection-start-line="196" selection-start-column="33" selection-end-line="196" selection-end-column="33" />
-          <folding>
-            <element signature="e#95#205#0" />
-          </folding>
+        <state relative-caret-position="150">
+          <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assembler1/assembler3.py">
+    <entry file="file://$PROJECT_DIR$/assembler1/mult.asm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" selection-start-line="3" selection-end-line="26" selection-end-column="17" />
+        <state relative-caret-position="223">
+          <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assembler/assembler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#186#195#0" expanded="true" />
+            <element signature="e#2194#2778#0" />
+            <element signature="e#4308#4473#0" />
+            <element signature="e#4511#5094#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assembler1/machine_code.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="135" lean-forward="true" selection-start-line="135" selection-end-line="135" />
+        <state relative-caret-position="175">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="e#22#606#0" />
             <element signature="e#940#1221#0" />
             <element signature="e#537#1682#0" />
-            <element signature="e#2079#2369#0" />
+            <element signature="e#3559#3565#0" />
+            <element signature="e#4048#4065#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assembler1/assembler3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="78" column="35" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#122#706#0" />
+            <element signature="e#2205#2242#0" />
+            <element signature="e#2492#3295#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assembler1/validate_instruction_types_h.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+          <folding>
+            <element signature="e#95#205#0" />
+            <element signature="e#1820#2777#0" />
+            <element signature="e#2802#3946#0" />
+            <element signature="e#3970#4251#0" />
+            <element signature="e#4275#4565#0" />
           </folding>
         </state>
       </provider>
