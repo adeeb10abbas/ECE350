@@ -1,35 +1,66 @@
-A = {'instruction_type': 'A-INSTRUCTION', 'value': '2', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}
-
 #TODO
+
+symbol_table = {'SP':0,
+                'LCL':1,
+                'ARG':2,
+                'THIS':3,
+                'THAT':4,
+                'R0':0,
+                'R1':1,
+                'R2':2,
+                'R3':3,
+                'R4':4,
+                'R5':5,
+                'R6':6,
+                'R7':7,
+                'R8':8,
+                'R9':9,
+                'R10':10,
+                'R11':11,
+                'R12':12,
+                'R13':13,
+                'R14':14,
+                'R15':15,
+                'SCREEN':16384,
+                'KBD':24576
+                }
+
+
 def generate_machine_code(program):
     """Generate machine code from intermediate data structure"""
 
-    ram_counter = 0
+    ram_counter = 15
     machine_code = []
 
     for instruction in program:
-        if s['instruction_type'] == 'A-INSTRUCTION':
-            address = ''
-            if s['value'] in symbol_table:
-                address = symbol_table[s['value']]
+        if instruction['instruction_type'] == 'A-INSTRUCTION':
+            if instruction['value'] in symbol_table:
+                address = symbol_table[instruction['value']]
 
             else:
-                symbol_table.update({s['value']: ram_counter})
-                ram_counter += 1
+                print(f"symbol not in symbol table. ram counter: ", ram_counter)
+                symbol_table.update({instruction['value']: ram_counter})
                 address = ram_counter
+                ram_counter += 1
 
-            bin = generate_A_binary(s, address)
+            bin = generate_A_binary(address)
 
-        elif s['instruction_type'] == 'C-INSTRUCTION':
-            C_bin = generate_C_binary(s)
+        elif instruction['instruction_type'] == 'C-INSTRUCTION':
+            bin = generate_C_binary(instruction)
 
         machine_code.append(bin)
 
+    print(machine_code)
     return machine_code
 
-#TODO
-def generate_A_binary(s, address):
-    pass
+A = {'instruction_type': 'A-INSTRUCTION', 'value': '2', 'value_type': 'NUMBER', 'dest': 'null', 'jmp': 'null', 'status': 0}
+
+def generate_A_binary(address):
+    instruction = '0' + f'{address:015b}'
+
+    #print(instruction)
+    return instruction
+
 
 
 """The dest bits are d1 d2 d3"""
@@ -85,39 +116,26 @@ valid_jmp_patterns =  {'null':'000',
                        'JMP':'111'
                        }
 
-C = {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'M', 'comp': '0', 'jmp': 'null', 'status': 0} #what is the default if there isno jmp or comp?
+#M = 1
+C = {'instruction_type': 'C-INSTRUCTION', 'value': '', 'value_type': '', 'dest': 'M', 'comp': '1', 'jmp': 'null', 'status': 0} #what is the default if there isno jmp or comp?
 
-#TOD0: Handle for when dest cmp and jmp are empty
+#dest=comp;jmp
 def generate_C_binary(s):
     instruction = '111'
-    dest = ''
-    comp = ''
-    jmp = ''
 
     dest = valid_dest_patterns[s['dest']]
-
-    if s['comp']:
-        comp = valid_comp_patterns[s['comp']] #todo: can comp be anything other than 0? Handle for that.
-
+    comp = valid_comp_patterns[s['comp']]
     jmp = valid_dest_patterns[s['jmp']]
-
-
-    print("dest", dest)
-    print("comp", comp)
-    print("jmp", jmp)
 
     instruction = instruction + comp + dest + jmp
 
-    print("Instruction", instruction)
+    #print("Instruction", instruction)
     return instruction
 
+program = [A, C]
 
-
-generate_C_binary(C)
-
-
-# 111 0101010 001 000
+generate_machine_code(program)
 
 
 
-# 111 0101010 001
+print("15 in bin", bin(15))
