@@ -1,0 +1,26 @@
+// This is a test program to verify operation of a basic loop.
+// Computes the sum = 1 + 2 + ... + argument[0] and pushes the 
+// result onto the stack. 
+// Initialize argument[0] manually to desired value before the code starts running.
+// The argument segment starts at RAM[400]
+// Author: Naga Kandasamy
+// Date: September 5, 2020
+// Orignal source: "The Elements of Computing Systems" by Nisan and Schocken, MIT Press.
+
+set sp 256
+set argument 400
+push constant 0    
+pop local 0         // initialize sum = 0
+label LOOP_START
+push argument 0    
+push local 0
+add
+pop local 0	        // sum = sum + counter
+push argument 0
+push constant 1
+sub                 // counter--
+pop argument 0      
+push argument 0
+if-goto LOOP_START  // If counter > 0, goto LOOP_START
+push local 0
+end
