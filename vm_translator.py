@@ -42,7 +42,7 @@ def generate_push_code(segment, index):
     ]
 
     s = []
-    if segment=="constant":
+    if segment == "constant":
         s.append("@"+str(index))
         s.append("D=A")
         s.append("@SP")
@@ -81,7 +81,7 @@ def generate_push_code(segment, index):
         s.append("@SP")
         s.append("M=M+1")
 
-    elif segment in similar_segments2: #TODO
+    elif segment in similar_segments2:
         s.append("@" + str(index))  # get value into D
         s.append("D=A")
 
@@ -98,7 +98,7 @@ def generate_push_code(segment, index):
         s.append("@SP")  # increment the stack pointer
         s.append("M=M+1")
 
-    else: #TODO
+    else:
         print("Error Segment is not [local, argument, this, that, temp, pointer, and static segments.]")
 
     return s
@@ -125,7 +125,7 @@ def generate_pop_code(segment, index):
         s.append(f"@{index}")
         s.append("M=D")
 
-    elif segment == "pointer": #TODO: Why have pointer as a memory segment at all if we have this and that?
+    elif segment == "pointer":
         s.append("@" + index)
         s.append("D=A")
         s.append("@3")
@@ -141,7 +141,7 @@ def generate_pop_code(segment, index):
         s.append("M=D")
 
                             #TODO: Why do we not save temp as a memory segment?
-    elif segment == "temp": #TODO: OH Question, why do we have temp segment and 2 general purpose registers? /
+    elif segment == "temp": #TODO: OH Question, why do we have temp segment and 2 general purpose registers?
         s.append(f"@{index}")
         s.append("D=A")
         s.append("@5")
@@ -253,45 +253,12 @@ def generate_relation_code(operation, line_number):
     placed back in the stack.
     """
 
-    # FIXME:
     s = []
     label_1 = ''
     label_2 = ''
-    
-    # s.append('@SP')
-    # s.append('A=M')
-    # s.append('D=M')             # D  = operand2
-    # s.append('@SP')
-    # s.append('M=M-1')           # Adjust stack pointer
-    # s.append('A=M')
-    #
-    # if operation=='eq':
-    #     pass
-    #
-    # elif operation == 'lt':
-    #     s.append('D=M-D')       # D = operand1 - operand2
-    #
-    #     label_1 = 'IF_LT_' + str(line_number)
-    #
-    #     s.append('@' + label_1)
-    #     s.append('D;JLT')       # if operand1 < operand2 goto IF_LT_*
-    #     s.append('@SP')
-    #     s.append('A=M')
-    #     s.append('M=0')          # Save result on stack
-    #     label_2 = 'END_IF_ELSE_' + str(line_number)
-    #     s.append('@' + label_2)
-    #     s.append('0;JMP')
-    #     s.append('(' + label_1 + ')')
-    #     s.append('@SP')
-    #     s.append('A=M')
-    #     s.append('M=-1')        # Save result on stack
-    #     s.append('(' + label_2 + ')')
-    #
-    # elif operation =='gt':
-    #     pass
 
-    #########
     s.append('@SP')
+    s.append('M=M-1')
     s.append('A=M')
     s.append('D=M')  # D  = operand2
     s.append('@SP')
@@ -322,8 +289,6 @@ def generate_relation_code(operation, line_number):
     s.append('A=M')
     s.append('M=-1')  # Save result on stack
     s.append('(' + label_2 + ')')
-
-    #TODO: #do we have to increment pointer at the end? Confirm OH: Yes. But decrement at the beginning.
     s.append("@SP")
     s.append("M=M+1")
 
@@ -358,31 +323,13 @@ def generate_if_goto_code(label):
     
     """
     s = []
-    # s.append("@SP")
-    # s.append("M=M-1")
-    # s.append("A=M")
-    # s.append("D=M")
-
-    #FIXME: Chnage from JEQ to JNE. Right now shit is inverse.
-
-    #If D == 0, go to (rest_of_code) ie keep executing. If D != 0, unconditional JMP to label.
-    # s.append("@rest_of_code")
-    # s.append("D;JEQ")
-    # s.append(f"@{label}")
-    # s.append("0;JMP")
-    # s.append("(rest_of_code)")
 
     s.append("@SP")
     s.append("M=M-1")
     s.append("A=M")
-    s.append("D=M") #operand1- operand2
-
-    #If D !0, jump to above label.
+    s.append("D=M")
     s.append(f"@{label}")
     s.append("D;JNE")
-
-
-
 
     return s
 

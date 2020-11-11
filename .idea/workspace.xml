@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba862300-d8d9-4f72-9ef2-b9505a5dbdc3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vm_translator.py" beforeDir="false" afterPath="$PROJECT_DIR$/vm_translator.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,22 +16,19 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vm_translator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="602">
-              <caret line="376" column="4" selection-start-line="376" selection-start-column="4" selection-end-line="376" selection-end-column="4" />
+            <state relative-caret-position="2852">
+              <caret line="449" lean-forward="true" selection-start-line="449" selection-end-line="449" />
               <folding>
                 <element signature="e#793#913#0" />
                 <element signature="e#894#989#0" />
                 <element signature="e#817#987#0" />
                 <element signature="e#1196#1433#0" />
-                <element signature="e#2010#2429#0" />
                 <element signature="e#4741#6786#0" />
                 <element signature="e#5766#6184#0" />
-                <element signature="e#6667#6684#0" />
                 <element signature="e#10127#10613#1" />
                 <element signature="e#11048#11491#0" />
                 <element signature="e#11511#12947#0" />
                 <element signature="e#11584#12414#0" />
-                <element signature="e#13838#13866#0" />
               </folding>
             </state>
           </provider>
@@ -58,6 +56,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -151,15 +154,15 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.021141648" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.064129665" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" weight="0.15060242" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.15662651" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.036144577" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.40722892" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -224,22 +227,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vm_translator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="602">
-          <caret line="376" column="4" selection-start-line="376" selection-start-column="4" selection-end-line="376" selection-end-column="4" />
+        <state relative-caret-position="2852">
+          <caret line="449" lean-forward="true" selection-start-line="449" selection-end-line="449" />
           <folding>
             <element signature="e#793#913#0" />
             <element signature="e#894#989#0" />
             <element signature="e#817#987#0" />
             <element signature="e#1196#1433#0" />
-            <element signature="e#2010#2429#0" />
             <element signature="e#4741#6786#0" />
             <element signature="e#5766#6184#0" />
-            <element signature="e#6667#6684#0" />
             <element signature="e#10127#10613#1" />
             <element signature="e#11048#11491#0" />
             <element signature="e#11511#12947#0" />
             <element signature="e#11584#12414#0" />
-            <element signature="e#13838#13866#0" />
           </folding>
         </state>
       </provider>
