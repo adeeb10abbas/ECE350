@@ -30,6 +30,17 @@ def generate_push_code(segment, index):
     In the case of a variable, it is read from the specified memory segment using (base + index) 
     addressing.
     """
+    similar_segments1 = [
+        'this',
+        'that',
+        'local',
+        'argument'
+    ]
+    similar_segments2 = [
+        'temp',
+        'pointer',
+    ]
+
     s = []
     if segment=="constant":
         s.append("@"+str(index))
@@ -40,7 +51,7 @@ def generate_push_code(segment, index):
         s.append("@SP")
         s.append("M=M+1")
 
-    elif segment == "static":
+    elif segment == "static": #TODO
         s.append("@"+str(index)) ## make sure this is correct not entirely sure (@filename.{index})
         s.append("D=M")
         s.append("@SP")
@@ -49,10 +60,19 @@ def generate_push_code(segment, index):
         s.append("@SP")
         s.append("M=M+1")
 
-    elif segment == "this":
-        s.append("@"+str(index))
+    elif segment in similar_segments1:
+        s.append("@" + str(index))
         s.append("D=A")
-        s.append("@THIS")
+
+        if segment == 'argument':
+            s.append("@ARG")
+        elif segment == 'local':
+            s.append("@LCL")
+        elif segment == 'this':
+            s.append("@THIS")
+        elif segment == 'that':
+            s.append("@THAT")
+
         s.append("A=M+D")
         s.append("D=M")
         s.append("@SP")
@@ -61,71 +81,28 @@ def generate_push_code(segment, index):
         s.append("@SP")
         s.append("M=M+1")
 
-    elif segment == "that":
-        s.append("@" + str(index)) # get value into D
+    elif segment in similar_segments2: #TODO
+        s.append("@" + str(index))  # get value into D
         s.append("D=A")
-        s.append("@THAT")
-        s.append("A=M+D") 
+
+        if segment == 'temp':
+            s.append("@5")
+        elif segment == 'pointer':
+            s.append("@3")
+
+        s.append("A=A+D")
         s.append("D=M")
-        s.append("@SP") # put it onto the stack
+        s.append("@SP")  # put it onto the stack
         s.append("A=M")
         s.append("M=D")
-        s.append("@SP") # increment the stack pointer
+        s.append("@SP")  # increment the stack pointer
         s.append("M=M+1")
 
-    elif segment =="local":
-        s.append("@" + str(index)) # get value into D
-        s.append("D=A")
-        s.append("@LCL")
-        s.append("A=M+D") 
-        s.append("D=M")
-        s.append("@SP") # put it onto the stack
-        s.append("A=M")
-        s.append("M=D")
-        s.append( "@SP") # increment the stack pointer
-        s.append("M=M+1")
-
-    elif segment =="temp":
-        s.append("@" + str(index)) # get value into D
-        s.append("D=A")
-        s.append("@5")
-        s.append("A=A+D") 
-        s.append("D=M")
-        s.append("@SP") # put it onto the stack
-        s.append("A=M")
-        s.append("M=D")
-        s.append("@SP") # increment the stack pointer
-        s.append("M=M+1")
-
-    elif segment =="argument":
-        s.append("@" + str(index)) # get value into D
-        s.append("D=A")
-        s.append("@ARG")
-        s.append("A=M+D") 
-        s.append("D=M")
-        s.append("@SP") # put it onto the stack
-        s.append( "A=M")
-        s.append("M=D")
-        s.append("@SP") # increment the stack pointer
-        s.append("M=M+1")
-
-    elif segment =="pointer":
-        s.append("@" + str(index)) # get value into D
-        s.append("D=A")
-        s.append("@3")
-        s.append("A=A+D") 
-        s.append("D=M")
-        s.append("@SP") # put it onto the stack
-        s.append("A=M")
-        s.append("M=D")
-        s.append("@SP") # increment the stack pointer
-        s.append("M=M+1")
-
-    else: 
+    else: #TODO
         print("Error Segment is not [local, argument, this, that, temp, pointer, and static segments.]")
-        # FIXME: complete implmentation for local, argument, this, that, temp, pointer, and static segments.
+
     return s
-    
+
 
 def generate_pop_code(segment, index):
     """Generate assembly code to pop value from the stack.
@@ -133,98 +110,75 @@ def generate_pop_code(segment, index):
     addressing.
     """
     s = []
+    similar_segments1 = [
+        'this',
+        'that',
+        'local',
+        'argument'
+    ]
     
-    # FIXME: complete implmentation for local, argument, this, that, temp, pointer, and static segments.
     if segment == "static":
-        s.append("@SP") # pop value into D
-        s.append("AM=M-1")
-        s.append("D=M")
-        s.append("@" + str(index)) ## check this to be sure
-        s.append("M=D")
-
-    elif segment == "this":
-        s.append("@" + str(index)) # get address into R13
-        s.append("D=A")
-        s.append("@THIS")
-        s.append("D=M+D") 
-        s.append("@R13")
-        s.append( "M=D")
-        s.append("@SP") # pop value into D
-        s.append("AM=M-1")
-        s.append( "D=M")
-        s.append("@R13") # address back in A (not D)
+        s.append("@SP")
+        s.append("M=M-1")
         s.append("A=M")
-        s.append("M=D")
-
-    elif segment == "that":
-        s.append("@" + str(index)) # get address into R13
-        s.append("D=A")
-        s.append("@THAT")
-        s.append("D=M+D")
-        s.append("@R13")
-        s.append("M=D")
-        s.append("@SP") # pop value into D
-        s.append("AM=M-1")
         s.append("D=M")
-        s.append("@R13") # address back in A (not D)
-        s.append("A=M")
+        s.append(f"@{index}")
         s.append("M=D")
 
-    elif segment == "argument":
-        s.append("@" + str(index)) # get address into R13
-        s.append("D=A")
-        s.append("@ARG")
-        s.append("D=M+D") 
-        s.append( "@R13")
-        s.append("M=D")
-        s.append("@SP")# pop value into D
-        s.append("AM=M-1")
-        s.append("D=M")
-        s.append("@R13") # address back in A (not D)
-        s.append("A=M")
-        s.append("M=D")
-
-    elif segment == "local":
-        s.append("@" + str(index)) # get address into R13
-        s.append("D=A")
-        s.append("@LCL")
-        s.append("D=M+D") 
-        s.append("@R13")
-        s.append("M=D")
-        s.append("@SP") #pop value into D
-        s.append("AM=M-1")
-        s.append("D=M")
-        s.append("@R13") #address back in A (not D)
-        s.append("A=M")
-        s.append("M=D")
-
-    elif segment == "pointer":
-        s.append("@" + index) # get address into R13
+    elif segment == "pointer": #TODO: Why have pointer as a memory segment at all if we have this and that?
+        s.append("@" + index)
         s.append("D=A")
         s.append("@3")
-        s.append("D=A+D") 
+        s.append("D=A+D")
         s.append("@R13")
         s.append("M=D")
-        s.append("@SP") # pop value into D
-        s.append("AM=M-1")
+        s.append("@SP")
+        s.append("M=M-1")
+        s.append("A=M")
         s.append("D=M")
-        s.append("@R13") # address back in A (not D)
+        s.append("@R13")
         s.append("A=M")
         s.append("M=D")
 
-    elif segment == "temp":
-        s.append("@" + str(index)) # get address into R13
+                            #TODO: Why do we not save temp as a memory segment?
+    elif segment == "temp": #TODO: OH Question, why do we have temp segment and 2 general purpose registers? /
+        s.append(f"@{index}")
         s.append("D=A")
         s.append("@5")
-        s.append("D=A+D") 
+        s.append("D=D+A")
         s.append("@R13")
         s.append("M=D")
-        s.append("@SP") # pop value into D
-        s.append("AM=M-1")
+        s.append("@SP")
+        s.append("M=M-1")
+        s.append("A=M")
         s.append("D=M")
-        s.append("@R13") # address back in A (not D)
+        s.append("@R13")
         s.append("A=M")
         s.append("M=D")
+
+    elif segment in similar_segments1:
+        if segment == 'local':
+            s.append("@LCL")
+        elif segment == 'this':
+            s.append("@THIS")
+        elif segment == 'that':
+            s.append("@THAT")
+        elif segment == 'argument':
+            s.append("@ARG")
+
+        s.append("D=M")
+        s.append(f"@{index}")
+        s.append("D=D+A")
+        s.append("@R13") #TODO: Is R13 temp register for sure?
+        s.append("M=D")
+        s.append("@SP")
+        s.append("M=M-1")
+        s.append("A=M")
+        s.append("D=M")
+        s.append("@R13")
+        s.append("A=M")
+        s.append("M=D")
+
     else:
         print("Error Segment is not [local, argument, this, that, temp, pointer, and static segments.]")
 
@@ -237,46 +191,37 @@ def generate_arithmetic_or_logic_code(operation):
     placed back in the stack.
     """
     s = []
+    similar_operations = ['add', 'sub', 'or', 'and']
 
-    if operation == "add":
-      s.append("@SP") # pop first value into D
-      s.append("AM=M-1")
-      s.append("D=M") 
-      s.append("@SP") # pop second value into M
-      s.append("AM=M-1") 
-      s.append("M=D+M") # push sum onto M
-      s.append("@SP")
-      s.append("M=M+1")    
+    if operation in similar_operations:
+        s.append("@SP")
+        s.append("M = M - 1")
+        s.append("A = M")
+        s.append("D = M")
+        s.append("@SP")
+        s.append("M = M - 1")
+        s.append("A = M")
 
-    elif operation == "sub":
-      s.append("@SP") # pop first value into D
-      s.append("AM=M-1")
-      s.append("D=M") 
-      s.append("@SP") # pop second value into M
-      s.append("AM=M-1") 
-      s.append("M=M-D") # push difference onto M
-      s.append("@SP")
-      s.append("M=M+1")
+        if operation == 'add':
+            s.append("D = M+D")
+        elif operation == 'sub':
+            s.append("D = M-D")
+        elif operation == 'or':
+            s.append('D = D|M')
+        elif operation == 'and':
+            s.append('D = D&M')
 
-    elif operation == "or":
-      s.append("@SP") # pop first value into D
-      s.append("AM=M-1")
-      s.append("D=M") 
-      s.append("@SP") # get second value into M
-      s.append("A=M-1")
-      s.append("M=D|M")
-    
-    elif operation == "and":
-      s.append("@SP") # pop first value into D
-      s.append("AM=M-1")
-      s.append("D=M") 
-      s.append("@SP") # get second value into M
-      s.append("A=M-1")
-      s.append("M=D&M") # put result back on stack
+        s.append("@SP")
+        s.append("A = M")
+        s.append("M = D")
+
+        #adjust stack pointer
+        s.append("@SP")
+        s.append("M = M + 1")
 
     else:
-        print("Error Message") ##Error Message
-    # FIXME: complete implementation for + , - , | , and & operators
+        print("Error Message") #TODO: Error message
+
     return s
 
 
@@ -285,20 +230,19 @@ def generate_unary_operation_code(operation):
     The operand is popped from the stack and the result of the operation 
     placed back in the stack.
     """
+    #Instead of popping and then pushing, we just negated and not-ed in place. Stack pointer does not change.
     s = []
+    s.append("@SP")
+    s.append("A=M-1")
+
     if operation == "neg":
-      s.append("@SP") # get (not pop) value into M
-      s.append("A=M-1") 
-      s.append("M=-M") # and negate it
+        s.append("M=-M")
 
     elif operation == "not":
-      s.append("@SP") # get (not pop) value into M
-      s.append("A=M-1") 
-      s.append("M=!M") # and negate it
+        s.append("M=!M")
 
     else:
-        print("Error message")
-    # FIXME: complete implementation for bit-wise not (!) and negation (-) operatiors
+        print("Error message") #TODO: Error message
     
     return s
 
@@ -308,42 +252,81 @@ def generate_relation_code(operation, line_number):
     The two operands are popped from the stack and the result of the operation 
     placed back in the stack.
     """
+
+    # FIXME:
     s = []
     label_1 = ''
     label_2 = ''
     
+    # s.append('@SP')
+    # s.append('A=M')
+    # s.append('D=M')             # D  = operand2
+    # s.append('@SP')
+    # s.append('M=M-1')           # Adjust stack pointer
+    # s.append('A=M')
+    #
+    # if operation=='eq':
+    #     pass
+    #
+    # elif operation == 'lt':
+    #     s.append('D=M-D')       # D = operand1 - operand2
+    #
+    #     label_1 = 'IF_LT_' + str(line_number)
+    #
+    #     s.append('@' + label_1)
+    #     s.append('D;JLT')       # if operand1 < operand2 goto IF_LT_*
+    #     s.append('@SP')
+    #     s.append('A=M')
+    #     s.append('M=0')          # Save result on stack
+    #     label_2 = 'END_IF_ELSE_' + str(line_number)
+    #     s.append('@' + label_2)
+    #     s.append('0;JMP')
+    #     s.append('(' + label_1 + ')')
+    #     s.append('@SP')
+    #     s.append('A=M')
+    #     s.append('M=-1')        # Save result on stack
+    #     s.append('(' + label_2 + ')')
+    #
+    # elif operation =='gt':
+    #     pass
+
+    #########
     s.append('@SP')
     s.append('A=M')
-    s.append('D=M')             # D  = operand2
+    s.append('D=M')  # D  = operand2
     s.append('@SP')
-    s.append('M=M-1')           # Adjust stack pointer
+    s.append('M=M-1')  # Adjust stack pointer
     s.append('A=M')
-    
-    if operation=='eq':
-        pass
+    s.append('D=M-D')  # D = operand1 - operand2
+    label_1 = 'IF_T_' + str(line_number)
+    s.append('@' + label_1)
+
+    # jump to label1 if D = 0, D < 0 and D > 0
+    if operation == 'eq':
+        s.append('D;JEQ')
 
     elif operation == 'lt':
-        s.append('D=M-D')       # D = operand1 - operand2
-        label_1 = 'IF_LT_' + str(line_number)
-        s.append('@' + label_1)
-        s.append('D;JLT')       # if operand1 < operand2 goto IF_LT_*
-        s.append('@SP')
-        s.append('A=M')
-        s.append('M=0')          # Save result on stack 
-        label_2 = 'END_IF_ELSE_' + str(line_number)
-        s.append('@' + label_2)
-        s.append('0;JMP')
-        s.append('(' + label_1 + ')')
-        s.append('@SP')
-        s.append('A=M')
-        s.append('M=-1')        # Save result on stack
-        s.append('(' + label_2 + ')')
+        s.append('D;JLT')  # if operand1 < operand2 goto IF_LT_*
 
-    elif operation =='gt':
-        pass
-   
-    # FIXME: complete implementation for eq and gt operations
-    
+    elif operation == 'gt':
+        s.append('D;JGT')
+
+    s.append('@SP')
+    s.append('A=M')
+    s.append('M=0')  # Save result on stack
+    label_2 = 'END_IF_ELSE_' + str(line_number)
+    s.append('@' + label_2)
+    s.append('0;JMP')
+    s.append('(' + label_1 + ')')
+    s.append('@SP')
+    s.append('A=M')
+    s.append('M=-1')  # Save result on stack
+    s.append('(' + label_2 + ')')
+
+    #TODO: #do we have to increment pointer at the end? Confirm OH: Yes. But decrement at the beginning.
+    s.append("@SP")
+    s.append("M=M+1")
+
     return s
   
 
@@ -375,18 +358,42 @@ def generate_if_goto_code(label):
     
     """
     s = []
-    
-    # FIXME: complete implementation
-    
+    # s.append("@SP")
+    # s.append("M=M-1")
+    # s.append("A=M")
+    # s.append("D=M")
+
+    #FIXME: Chnage from JEQ to JNE. Right now shit is inverse.
+
+    #If D == 0, go to (rest_of_code) ie keep executing. If D != 0, unconditional JMP to label.
+    # s.append("@rest_of_code")
+    # s.append("D;JEQ")
+    # s.append(f"@{label}")
+    # s.append("0;JMP")
+    # s.append("(rest_of_code)")
+
+    s.append("@SP")
+    s.append("M=M-1")
+    s.append("A=M")
+    s.append("D=M") #operand1- operand2
+
+    #If D !0, jump to above label.
+    s.append(f"@{label}")
+    s.append("D;JNE")
+
+
+
+
     return s
 
 
 def generate_goto_code(label):
     """Generate assembly code for goto."""
     s = []
-    
-    # TODO: complete implementation 
-    
+
+    s.append(f"@{label}")
+    s.append("0;JMP")
+
     return s
 
 def generate_pseudo_instruction_code(label):
@@ -394,7 +401,6 @@ def generate_pseudo_instruction_code(label):
     s = []
     s.append('(' + label + ')')
     return s
-
 
 def generate_set_code(register, value):
     """Generate assembly code for set"""
@@ -421,11 +427,6 @@ def generate_set_code(register, value):
     s.append('M=D')
     
     return s
-
-print(generate_set_code('lcl', '300'))
-
-
-
 
 def translate(tokens, line_number):
     """Translate a VM command/statement into the corresponding Hack assembly commands/statements."""
